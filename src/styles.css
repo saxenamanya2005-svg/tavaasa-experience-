@@ -1,0 +1,152 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-script: "Cormorant Garamond", serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-cream: var(--cream);
+  --color-bone: var(--bone);
+  --color-coffee: var(--coffee);
+  --color-espresso: var(--espresso);
+  --color-forest: var(--forest);
+  --color-moss: var(--moss);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  --shadow-elegant: 0 30px 60px -30px oklch(0.18 0.03 60 / 0.35);
+  --shadow-soft: 0 10px 30px -15px oklch(0.18 0.03 60 / 0.25);
+}
+
+:root {
+  --background: oklch(0.97 0.012 80);
+  --foreground: oklch(0.22 0.03 50);
+  --cream: oklch(0.96 0.018 85);
+  --bone: oklch(0.93 0.018 80);
+  --coffee: oklch(0.42 0.05 50);
+  --espresso: oklch(0.22 0.03 45);
+  --forest: oklch(0.32 0.05 155);
+  --moss: oklch(0.45 0.06 150);
+  --gold: oklch(0.72 0.12 80);
+  --gold-soft: oklch(0.82 0.08 85);
+
+  --card: oklch(0.98 0.008 85);
+  --card-foreground: oklch(0.22 0.03 50);
+  --muted: oklch(0.92 0.015 80);
+  --muted-foreground: oklch(0.45 0.03 60);
+  --border: oklch(0.85 0.02 75);
+  --primary: var(--espresso);
+  --primary-foreground: var(--cream);
+  --accent: var(--gold);
+  --accent-foreground: var(--espresso);
+  --ring: var(--gold);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .font-sans { font-family: var(--font-sans); }
+
+  .text-balance { text-wrap: balance; }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .gold-rule {
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    vertical-align: middle;
+    margin: 0 0.75rem;
+  }
+
+  .grain::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(oklch(0.2 0.02 50 / 0.06) 1px, transparent 1px);
+    background-size: 3px 3px;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .fade-up {
+    animation: fadeUp 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .fade-in {
+    animation: fadeIn 1.4s ease-out both;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes kenburns {
+    0% { transform: scale(1.08) translate3d(0,0,0); }
+    100% { transform: scale(1.18) translate3d(-1%, -1%, 0); }
+  }
+  .kenburns { animation: kenburns 18s ease-in-out infinite alternate; }
+
+  @keyframes scrollDot {
+    0% { transform: translateY(-6px); opacity: 0; }
+    40% { opacity: 1; }
+    100% { transform: translateY(14px); opacity: 0; }
+  }
+  .scroll-dot { animation: scrollDot 1.8s ease-in-out infinite; }
+}
